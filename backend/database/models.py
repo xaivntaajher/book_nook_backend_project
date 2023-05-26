@@ -31,3 +31,11 @@ class Car(db.Model):
     user = db.relationship("User")
 
 # TODO: Add your models below, remember to add a new migration and upgrade database
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.String(255), nullable=False, unique=True)
+    text = db.Column(db.String(255), nullable=False)
+    rating = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, nullable=False, unique=True)
+    user = db.Column(db.Relationship)
