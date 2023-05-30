@@ -54,11 +54,16 @@ class GetBookInformationResource(Resource):
 
         avg_rating = ratings_total/len(reviews) if len(reviews) > 0 else 0
 
+        favorited = Favorite.query.filter_by(user_id=user_id, book_id=book_id).first()
+        is_favorited = False
+        if favorited is not None:
+            is_favorited = True
+
         response = {
             "reviews": reviews_data,
-            "average_rating": round(avg_rating, 2)
+            "average_rating": round(avg_rating, 2),
+            "is_favorited": is_favorited
         }
-        
         
         return response, 200
         # # Alternate version where JWT is used, but not required
