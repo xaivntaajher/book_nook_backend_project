@@ -40,3 +40,32 @@ class UserFavoritesResource(Resource):
         db.session.add(new_favorite)
         db.session.commit()
         return favorite_schema.dump(new_favorite), 201
+    
+class GetBookInformationResource(Resource):
+    @jwt_required()
+    def get(self, book_id):
+        user_id = get_jwt_identity()
+        reviews = Review.query.filter_by(book_id=book_id).all()
+        reviews_data = reviews_schema.dump(reviews)
+        
+        ratings_total = 0
+        for review in reviews:
+            ratings_total += review.rating
+
+        avg_rating = ratings_total/len(reviews) if len(reviews) > 0 else 0
+
+        response = {
+            "reviews": reviews_data,
+            "average_rating": round(avg_rating, 2)
+        }
+        
+        
+        return response, 200
+        # # Alternate version where JWT is used, but not required
+        # try:
+        #     verify_jwt_in_request()
+        #     user_id = get_jwt_identity()
+        # # Do stuff with token
+        # except:
+        # # Do stuff without token
+        #     return "Unauthorized", 401
