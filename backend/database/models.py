@@ -37,5 +37,10 @@ class Review(db.Model):
     book_id = db.Column(db.String(255), nullable=False, unique=True)
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, nullable=False, unique=True)
-    user = db.Column(db.Relationship)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User")
+    
+
+    
+    
+

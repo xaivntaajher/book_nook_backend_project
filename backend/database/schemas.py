@@ -58,7 +58,6 @@ car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
 
 
-# TODO: Add your schemas below
 class ReviewSchema(ma.Schema):
     """
     Schema used for displaying users, does NOT include password
@@ -68,7 +67,7 @@ class ReviewSchema(ma.Schema):
     text = fields.String(required=True)
     rating = fields.Integer(required=True)
     user_id = fields.Integer(required=True)
-    user = ma.Relationship(required=True)
+ 
     class Meta:
         fields = ("id", "book_id", "text", "rating", "user_id", "user",)
 
