@@ -74,3 +74,30 @@ class GetBookInformationResource(Resource):
         # except:
         # # Do stuff without token
         #     return "Unauthorized", 401
+
+
+class ReviewDetailResource(Resource):
+    @jwt_required()
+    def put(self, review_id):
+        current_user_id = get_jwt_identity()
+        review = Review.query.filter_by(id=review_id, user_id=current_user_id).first()
+        if not review:
+            return {'message': 'Review not found'}, 404
+
+        data = request.get_json()
+        review.text = data.get('text', review.text)
+        review.rating = data.get('rating', review.rating)
+        db.session.commit()
+
+        return review_schema.dump(review), 200
+
+    @jwt_required()
+    def delete(self, review_id):
+        review = Review.query.get(review_id)
+        if not review:
+            return {'message': 'Review not found'}, 404
+        
+        db.session.delete(review)
+        db.session.commit()
+        
+        return '', 204
