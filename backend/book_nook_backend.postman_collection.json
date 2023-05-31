@@ -1,10 +1,8 @@
 {
 	"info": {
-		"_postman_id": "fcd289bb-2c07-4b20-b121-b67b675248da",
+		"_postman_id": "9162a9e1-2aa8-410f-a742-f5b9c66470cc",
 		"name": "book_nook_backend",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27021436",
-		"_collection_link": "https://red-moon-760260.postman.co/workspace/Team-Workspace~22cf600e-c6cc-4b78-84e5-c2d322b88d00/collection/27021436-fcd289bb-2c07-4b20-b121-b67b675248da?action=share&creator=27021436&source=collection_link"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -17,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tom\",\r\n    \"email\": \"tom@bob.bob\",\r\n    \"password\": \"password\",\r\n    \"first_name\": \"bob\",\r\n    \"last_name\": \"bobson\"\r\n}",
+							"raw": "{\r\n    \"username\": \"anothe\",\r\n    \"email\": \"jerry\",\r\n    \"password\": \"password\",\r\n    \"first_name\": \"bob\",\r\n    \"last_name\": \"bobson\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"bob\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"username\": \"jerry\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -251,21 +249,18 @@
 			"item": [
 				{
 					"name": "Post New Review (Protected)",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ2MDMzMiwianRpIjoiNDAxZWUyNmYtOTk4Yi00OTBlLTg5MjktYzhjZGJiOWYwYTJjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjIiLCJuYmYiOjE2ODU0NjAzMzIsImV4cCI6MTY4NjA2NTEzMiwiaWQiOjIsInVzZXJuYW1lIjoiYm9iIiwiZmlyc3RfbmFtZSI6ImJvYiJ9.gsxyjkv6KBJN7kDbmpFP4lsIxAdy2-Tl_k4xvSz9GIY",
-								"type": "text"
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ3ODU4OSwianRpIjoiZTI2NjliODgtZDU5NC00NjAxLTk2OWMtOTdkY2JjZTM2MWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNjg1NDc4NTg5LCJleHAiOjE2ODYwODMzODksImlkIjoxMiwidXNlcm5hbWUiOiJqZXJyeSIsImZpcnN0X25hbWUiOiJib2IifQ.rbKjs_8GNoUPW-33jgVM1P7JLOeyULrZeeP3PE10iI0",
+								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"book_id\": \"1\",\r\n    \"text\": \"Hello\",\r\n    \"rating\": 3\r\n}\r\n",
+							"raw": "    {\r\n        \"book_id\": \"5\",\r\n        \"text\": \"The water is not a dry place\",\r\n        \"rating\": \"2\"\r\n\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,13 +292,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ2MDMzMiwianRpIjoiNDAxZWUyNmYtOTk4Yi00OTBlLTg5MjktYzhjZGJiOWYwYTJjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjIiLCJuYmYiOjE2ODU0NjAzMzIsImV4cCI6MTY4NjA2NTEzMiwiaWQiOjIsInVzZXJuYW1lIjoiYm9iIiwiZmlyc3RfbmFtZSI6ImJvYiJ9.gsxyjkv6KBJN7kDbmpFP4lsIxAdy2-Tl_k4xvSz9GIY",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ4MDU0NiwianRpIjoiMjc4NzRmZTMtNDQ4NS00YzFkLWIzZDQtNDIyYmMyMDc2YzE2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNjg1NDgwNTQ2LCJleHAiOjE2ODYwODUzNDYsImlkIjoxMiwidXNlcm5hbWUiOiJqZXJyeSIsImZpcnN0X25hbWUiOiJib2IifQ.sjFA4SAR6e58Cd7D0g0fjv0vW6l1OQxKTrhJakMIuCA",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"book_id\": \"1\",\r\n    \"title\": \"Hello Earth\",\r\n    \"thumbnail_url\": \"helloearth\"\r\n}\r\n",
+							"raw": "{\r\n    \"book_id\": \"3\",\r\n    \"title\": \"Hello World\",\r\n    \"thumbnail_url\": \"www.w..w..w.\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -335,7 +330,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ2NjQ3NiwianRpIjoiY2FkN2IwMTEtODY3ZC00NzEyLWE1OTUtYmMwMjYyZWVmYTYzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjIiLCJuYmYiOjE2ODU0NjY0NzYsImV4cCI6MTY4NjA3MTI3NiwiaWQiOjIsInVzZXJuYW1lIjoiYm9iIiwiZmlyc3RfbmFtZSI6ImJvYiJ9.49MyK_RwG1g9JhHHjX6Gp5zU3fBjT0Mxg01iTmQqDto",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTQ3ODU4OSwianRpIjoiZTI2NjliODgtZDU5NC00NjAxLTk2OWMtOTdkY2JjZTM2MWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNjg1NDc4NTg5LCJleHAiOjE2ODYwODMzODksImlkIjoxMiwidXNlcm5hbWUiOiJqZXJyeSIsImZpcnN0X25hbWUiOiJib2IifQ.rbKjs_8GNoUPW-33jgVM1P7JLOeyULrZeeP3PE10iI0",
 								"type": "text"
 							}
 						],
@@ -369,7 +364,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/api/book_information/5",
+							"raw": "http://127.0.0.1:5000/api/book_information/4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -381,7 +376,76 @@
 							"path": [
 								"api",
 								"book_information",
-								"5"
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTUzMjQ2OSwianRpIjoiMWIwNjM3YmItY2ZmMC00OTFjLThjMjQtYTgxMDYwY2UxMzM3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNjg1NTMyNDY5LCJleHAiOjE2ODYxMzcyNjksImlkIjoxMiwidXNlcm5hbWUiOiJqZXJyeSIsImZpcnN0X25hbWUiOiJib2IifQ.1qhYMcBXxFrHOgAeQ3HXPMsqhkucPTU92fz9CSBd2OQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\":\"5\",\r\n        \"book_id\": \"5\",\r\n        \"text\": \"The water is not a dry place...UPDATED TO SAY it is STILL NOT DRY\",\r\n        \"rating\": \"2\"\r\n\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/reviews/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"reviews",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NTUzMjQ2OSwianRpIjoiMWIwNjM3YmItY2ZmMC00OTFjLThjMjQtYTgxMDYwY2UxMzM3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNjg1NTMyNDY5LCJleHAiOjE2ODYxMzcyNjksImlkIjoxMiwidXNlcm5hbWUiOiJqZXJyeSIsImZpcnN0X25hbWUiOiJib2IifQ.1qhYMcBXxFrHOgAeQ3HXPMsqhkucPTU92fz9CSBd2OQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/reviews/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"reviews",
+								"3"
 							]
 						}
 					},
