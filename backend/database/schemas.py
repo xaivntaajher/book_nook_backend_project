@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car
+from database.models import User, Car, Review, Favorite
 
 ma = Marshmallow()
 
@@ -58,4 +58,44 @@ car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
 
 
-# TODO: Add your schemas below
+class ReviewSchema(ma.Schema):
+    """
+    Schema used for displaying reviews
+    """
+    id = fields.Integer(primary_key=True)
+    book_id = fields.String(required=True)
+    text = fields.String(required=True)
+    rating = fields.Integer(required=True)
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+    class Meta:
+        fields = ("id", "book_id", "text", "rating", "user_id", "user",)
+
+    @post_load
+    def create_review(self, data, **kwargs):
+        return Review(**data)
+
+register_schema = RegisterSchema()
+review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
+
+class FavoriteSchema(ma.Schema):
+    """
+    Schema used for displaying favorites
+    """
+    id = fields.Integer(primary_key=True)
+    book_id = fields.String(required=True)
+    title = fields.String(required=True)
+    thumbnail_url = fields.String()
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+    class Meta:
+        fields = ("id", "book_id", "title", "thumbnail_url", "user_id", "user",)
+
+    @post_load
+    def create_review(self, data, **kwargs):
+        return Favorite(**data)
+
+register_schema = RegisterSchema()
+favorite_schema = FavoriteSchema()
+favorites_schema = FavoriteSchema(many=True)
