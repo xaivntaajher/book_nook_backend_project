@@ -6,6 +6,8 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AddCarPage from "./pages/AddCarPage/AddCarPage";
+import SearchBarPage from "./pages/SearchBarPage/SearchBarPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -13,6 +15,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+
 
 function App() {
   return (
@@ -24,6 +27,22 @@ function App() {
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute>
+              <AddCarPage />
+            </PrivateRoute>
+          }
+        />
+          <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchBarPage />
             </PrivateRoute>
           }
         />
