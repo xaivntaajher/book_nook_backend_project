@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AddCarPage from "./pages/AddCarPage/AddCarPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import BookDetail from "./pages/BookDetailPage/BookDetailPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -43,6 +44,15 @@ function App() {
           element={
             <PrivateRoute>
               <SearchPage />
+            </PrivateRoute>
+          }
+        />
+
+          <Route
+          path="/details/:book_id/"
+          element={
+            <PrivateRoute>
+              <BookDetail />
             </PrivateRoute>
           }
         />

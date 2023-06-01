@@ -37,6 +37,10 @@ const HomePage = () => {
       <Link to="/search">
         <p>click to search</p>
       </Link>
+      <Link to="/detail">
+        <p>Book Details</p>
+      </Link>
+
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
