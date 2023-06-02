@@ -20,7 +20,7 @@ class UserFavoritesResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
-        user_favorites = Favorite.query.filter_by(user_id=user_id)
+        user_favorites = Favorite.query.filter_by(user_id=user_id).all()
         return favorites_schema.dump(user_favorites), 200
         # # Alternate version where JWT is used, but not required
         # try:
@@ -35,8 +35,11 @@ class UserFavoritesResource(Resource):
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
-        new_favorite = favorite_schema.load(form_data)
-        new_favorite.user_id = user_id
+        book_id = form_data.get("book_id")
+        favorite = Favorite.query.filter_by(user_id=user_id, book_id=book_id).first()
+        if favorite:
+            return {"message": "Book is already favorited"}, 400
+        new_favorite = Favorite(user_id=user_id, book_id=book_id)
         db.session.add(new_favorite)
         db.session.commit()
         return favorite_schema.dump(new_favorite), 201

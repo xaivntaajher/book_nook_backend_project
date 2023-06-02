@@ -1,19 +1,15 @@
-import React from 'react';
-import axios from "axios";
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 
 
-const BookDetail = ({book}) =>{
-    const navigate = useNavigate();
+const BookDetailPage = ({}) => {
+  return (
+    <div>
+      <h1>Book Title Here</h1>
+      <h2>Author</h2>
 
-
-    const {book_id} = useParams()
-
-    return(
-        <div>
-            {book_id}
-        </div>
-    )
+    </div>
+  );
 };
 
-export default BookDetail
+
+export default BookDetailPage;

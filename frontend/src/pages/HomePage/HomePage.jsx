@@ -1,16 +1,32 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
-
 import axios from "axios";
 
 const HomePage = () => {
-  // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
-  // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState([]); 
+  const [books, setBooks] = useState([])
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        let response = await axios.get("http://localhost:5000/api/user_favorites", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setBooks(response.data)
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    fetchBooks();
+
+  }, [token]);
+
+  console.log(books)
+
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -22,23 +38,23 @@ const HomePage = () => {
         });
         setCars(response.data);
       } catch (error) {
-        console.log(error.response.data);
+        console.error(error.response.data);
       }
     };
     fetchCars();
+
   }, [token]);
+
+  console.log(cars)
+
   return (
     <div className="container">
-      {console.log(user)}
       <h1>Home Page for {user.username}!</h1>
       <Link to="/add">
         <p>click to add new car</p>
       </Link>
       <Link to="/search">
         <p>click to search</p>
-      </Link>
-      <Link to="/detail">
-        <p>Book Details</p>
       </Link>
 
       {cars &&
@@ -47,7 +63,15 @@ const HomePage = () => {
             {car.year} {car.model} {car.make}
           </p>
         ))}
-    </div>
+
+      {books &&
+        books.map((book) => (
+          <p key={book.id}>
+            {book.title}
+          </p>
+        ))}
+
+      </div>
   );
 };
 
