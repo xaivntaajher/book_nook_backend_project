@@ -29,7 +29,6 @@ const HomePage = () => {
 
   const bookCards = books.map((book) => <BookCard key={book.id} book={book} />)
 
-  console.log(books)
 
 
   useEffect(() => {
@@ -60,6 +59,10 @@ const HomePage = () => {
       <Link to="/search">
         <p>click to search</p>
       </Link>
+      <Link to="/favorites">
+        <p>Favorites Page</p>
+      </Link>
+
 
       {cars &&
         cars.map((car) => (
@@ -67,9 +70,6 @@ const HomePage = () => {
             {car.year} {car.model} {car.make}
           </p>
         ))}
-
-
-      <div>{bookCards}</div>
 
     </div>
   );

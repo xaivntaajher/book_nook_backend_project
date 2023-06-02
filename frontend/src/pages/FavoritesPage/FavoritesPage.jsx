@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import BookCard from "../BookDetailPage/BookCard";
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState([]);
+  const [user, token] = useAuth();
+  const [books, setBooks] = useState([])
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchBooks = async () => {
       try {
-        const response = await axios.get(
-          "http://127.0.0.1:5000/api/user_favorites"
-        );
-        setFavorites(response.data);
+        let response = await axios.get("http://localhost:5000/api/user_favorites", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setBooks(response.data)
       } catch (error) {
-        console.error("Error fetching favorites:", error);
+        console.log(error.response.data);
       }
     };
+    fetchBooks();
 
-    fetchFavorites();
-  }, []);
+  }, [token]);
+
+
+  const bookCards = books.map((book) => <BookCard key={book.id} book={book} />)
+
+
 
   return (
-    <div>
-      <h1>Favorites</h1>
-      {favorites.length > 0 ? (
-        <div>
-          {favorites.map((favorite) => (
-            <BookCard key={favorite.id} book={favorite} />
-          ))}
-        </div>
-      ) : (
-        <p>No favorites yet.</p>
-      )}
+    <div className="container">
+
+      <div>{bookCards}</div>
+
     </div>
   );
 };

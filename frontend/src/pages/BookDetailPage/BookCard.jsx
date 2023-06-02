@@ -10,7 +10,8 @@ const BookCard = ({ book }) => {
 
 
   return    <div className='book-card' onClick={handleClick}>
-    {book.title}
+    <div>{book.title}</div>
+    <div>{book.thumbnail_url}</div>
 </div>
 };
 
