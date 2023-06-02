@@ -1,16 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const BookCard = ({ title, author, coverImage, description }) => {
-  return (
-    <div className="book-card">
-      <img src={coverImage} alt={title} className="book-card__image" />
-      <div className="book-card__info">
-        <h2 className="book-card__title">{title}</h2>
-        <p className="book-card__author">{author}</p>
-        <p className="book-card__description">{description}</p>
-      </div>
-    </div>
-  );
+const BookCard = ({ book }) => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/book')
+  }
+
+
+  return    <div className='book-card' onClick={handleClick}>
+    {book.title}
+</div>
 };
 
 export default BookCard;

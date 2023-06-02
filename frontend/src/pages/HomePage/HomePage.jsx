@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import BookCard from "../BookDetailPage/BookCard";
 
 const HomePage = () => {
   const [user, token] = useAuth();
@@ -24,6 +25,9 @@ const HomePage = () => {
     fetchBooks();
 
   }, [token]);
+
+
+  const bookCards = books.map((book) => <BookCard key={book.id} book={book} />)
 
   console.log(books)
 
@@ -64,14 +68,10 @@ const HomePage = () => {
           </p>
         ))}
 
-      {books &&
-        books.map((book) => (
-          <p key={book.id}>
-            {book.title}
-          </p>
-        ))}
 
-      </div>
+      <div>{bookCards}</div>
+
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 
-const BookDetailPage = ({}) => {
+const BookDetailPage = () => {
   return (
     <div>
       <h1>Book Title Here</h1>
