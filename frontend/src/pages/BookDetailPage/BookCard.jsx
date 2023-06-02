@@ -5,7 +5,7 @@ const BookCard = ({ book }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('/book')
+    navigate(`/book/${book.id}`)
   }
 
 

@@ -50,7 +50,7 @@ function App() {
 
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/book" element={<BookDetailPage />} />
+        <Route path="/book/:book_id" element={<BookDetailPage />} />
       </Routes>
       <Footer />
     </div>
