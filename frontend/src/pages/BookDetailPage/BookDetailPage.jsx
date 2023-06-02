@@ -1,34 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
+const BookDetailPage = () => {
+  const { book_id } = useParams();
+  const [book, setBook] = useState(null);
+  const [user, token] = useAuth();
 
-
-const BookDetailPage = ({}) => {
-  const {book_id} = useParams();
-  const [book, setBook] = useState(null)
-
-  const fetchBook = async() => {
+  const fetchBook = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/user_favorites/${book_id}`)
-      setBook(response.data)
-
+      const response = await axios.get(
+        `http://localhost:5000/api/user_favorites/${book_id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setBook(response.data);
     } catch (error) {
-
+      console.log(error.response.data);
     }
-  }
+  };
 
-useEffect(() =>{fetchBook()}, [book_id])
+  useEffect(() => {
+    fetchBook();
+  }, [book_id, token]);
 
   return (
+    book &&
     <div>
       <h1>{book_id}</h1>
-      <h2></h2>
+    
+      <h2>{book.title}</h2>
+      <h2>{book.thumbnail_url}</h2>
+
 
     </div>
   );
 };
-
 
 export default BookDetailPage;

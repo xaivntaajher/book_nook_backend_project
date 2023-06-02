@@ -16,12 +16,26 @@ class UserReviewsResource(Resource):
         db.session.commit()
         return review_schema.dump(new_review), 201
     
+    
+class UserFavoriteBookResource(Resource):
+    @jwt_required()
+    def get(self, favorite_id):
+        user_id = get_jwt_identity()
+        user_favorites = Favorite.query.get_or_404(favorite_id)
+        return favorite_schema.dump(user_favorites), 200
+    
+
+
+
 class UserFavoritesResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
         user_favorites = Favorite.query.filter_by(user_id=user_id).all()
         return favorites_schema.dump(user_favorites), 200
+    
+
+
         # # Alternate version where JWT is used, but not required
         # try:
         #     verify_jwt_in_request()
