@@ -8,10 +8,11 @@ const BookCard = ({ book }) => {
     navigate(`/book/${book.id}`)
   }
 
+  console.log(book)
 
   return    <div className='book-card' onClick={handleClick}>
     <div>{book.title}</div>
-    <div>{book.thumbnail_url}</div>
+    <div>{book.thumbnail}</div>
 </div>
 };
 

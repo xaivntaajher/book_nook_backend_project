@@ -62,14 +62,15 @@ class GetBookInformationResource(Resource):
     @jwt_required()
     def get(self, book_id):
         user_id = get_jwt_identity()
+
         reviews = Review.query.filter_by(book_id=book_id).all()
         reviews_data = reviews_schema.dump(reviews)
-        
+
         ratings_total = 0
         for review in reviews:
             ratings_total += review.rating
 
-        avg_rating = ratings_total/len(reviews) if len(reviews) > 0 else 0
+        avg_rating = ratings_total / len(reviews) if len(reviews) > 0 else 0
 
         favorited = Favorite.query.filter_by(user_id=user_id, book_id=book_id).first()
         is_favorited = False
@@ -77,11 +78,13 @@ class GetBookInformationResource(Resource):
             is_favorited = True
 
         response = {
+            "title": favorited.title,
+            "url": favorited.thumbnail_url,
             "reviews": reviews_data,
             "average_rating": round(avg_rating, 2),
             "is_favorited": is_favorited
         }
-        
+
         return response, 200
         # # Alternate version where JWT is used, but not required
         # try:

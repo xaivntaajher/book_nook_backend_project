@@ -47,6 +47,8 @@ class Favorite(db.Model):
     thumbnail_url = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User")
+
+
     
     
 

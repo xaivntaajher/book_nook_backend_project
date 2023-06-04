@@ -7,11 +7,12 @@ const BookDetailPage = () => {
   const { book_id } = useParams();
   const [book, setBook] = useState(null);
   const [user, token] = useAuth();
+  const {review_id} = useParams();
 
   const fetchBook = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/user_favorites/${book_id}`,
+        `http://localhost:5000/api/book_information/${book_id}`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -28,15 +29,22 @@ const BookDetailPage = () => {
     fetchBook();
   }, [book_id, token]);
 
+
+console.log(book_id)
+
   return (
     book &&
     <div>
-      <h1>{book_id}</h1>
-    
-      <h2>{book.title}</h2>
-      <h2>{book.thumbnail_url}</h2>
 
+      <div>{book_id}</div>
+      <div>{book.title}</div>
+      <div>{book.url}</div>
+      <div>{book.reviews}</div>
+      <div>{book.average_rating}</div>
+      
+      
 
+   
     </div>
   );
 };

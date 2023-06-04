@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import BookCard from "../BookDetailPage/BookCard";
+import { Link } from "react-router-dom";
 
 const FavoritesPage = () => {
   const [user, token] = useAuth();
@@ -26,8 +26,11 @@ const FavoritesPage = () => {
   }, [token]);
 
 
-  const bookCards = books.map((book) => <BookCard key={book.id} book={book} />)
-
+  const bookCards = books.map((book) => (
+    <Link key={book.id} to={`/book/${book.book_id}`}>
+      <BookCard book={book} />
+    </Link>
+));
 
 
   return (
