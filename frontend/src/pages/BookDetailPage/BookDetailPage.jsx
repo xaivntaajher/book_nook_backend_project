@@ -7,7 +7,7 @@ const BookDetailPage = () => {
   const { book_id } = useParams();
   const [book, setBook] = useState(null);
   const [user, token] = useAuth();
-  const {review_id} = useParams();
+  const { review_id } = useParams();
 
   const fetchBook = async () => {
     try {
@@ -19,7 +19,9 @@ const BookDetailPage = () => {
           },
         }
       );
-      setBook(response.data);
+      if (response.data) {
+        setBook(response.data);
+      }
     } catch (error) {
       console.log(error.response.data);
     }
@@ -29,23 +31,28 @@ const BookDetailPage = () => {
     fetchBook();
   }, [book_id, token]);
 
-
-console.log(book_id)
-
   return (
-    book &&
-    <div>
+    book && (
+      <div>
+        {book.reviews.map((review) => (
+          <div key={review.id}>
+            <p>{review.text}</p>
+            <p>{review.rating}</p>
+          </div>
+        ))}
 
-      <div>{book_id}</div>
-      <div>{book.title}</div>
-      <div>{book.url}</div>
-      <div>{book.reviews}</div>
-      <div>{book.average_rating}</div>
-      
-      
+        <p>Average Rating: {book.average_rating}</p>
 
-   
-    </div>
+        {book.is_favorited ? (
+          <div>
+            <p>Title: {book.title}</p>
+            <p>URL: {book.url}</p>
+          </div>
+        ) : (
+          <p>Book is not favorited</p>
+        )}
+      </div>
+    )
   );
 };
 
