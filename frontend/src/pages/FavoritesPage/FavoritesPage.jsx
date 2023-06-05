@@ -4,12 +4,14 @@ import axios from "axios";
 import BookCard from "../BookDetailPage/BookCard";
 import { Link } from "react-router-dom";
 
+
+
 const FavoritesPage = () => {
   const [user, token] = useAuth();
   const [books, setBooks] = useState([])
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchFavorites = async () => {
       try {
         let response = await axios.get("http://localhost:5000/api/user_favorites", {
           headers: {
@@ -21,7 +23,7 @@ const FavoritesPage = () => {
         console.log(error.response.data);
       }
     };
-    fetchBooks();
+    fetchFavorites();
 
   }, [token]);
 
@@ -35,7 +37,7 @@ const FavoritesPage = () => {
 
   return (
     <div className="container">
-
+      <div>{user.username}'s Favorites!</div>
       <div>{bookCards}</div>
 
     </div>

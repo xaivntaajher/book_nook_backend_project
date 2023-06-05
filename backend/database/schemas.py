@@ -93,7 +93,7 @@ class FavoriteSchema(ma.Schema):
         fields = ("id", "book_id", "title", "thumbnail_url", "user_id", "user",)
 
     @post_load
-    def create_review(self, data, **kwargs):
+    def create_favorite(self, data, **kwargs):
         return Favorite(**data)
 
 register_schema = RegisterSchema()

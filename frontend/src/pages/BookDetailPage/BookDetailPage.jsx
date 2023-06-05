@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import ReviewList from '../../components/ReviewList/ReviewList';
 
 const BookDetailPage = () => {
   const { book_id } = useParams();
@@ -23,7 +24,7 @@ const BookDetailPage = () => {
   const fetchReviews = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/book_reviews/${book_id}`,
+        `http://localhost:5000/api/book_information/${book_id}`,
         {
           headers: {
             Authorization: 'Bearer ' + token,
@@ -39,7 +40,7 @@ const BookDetailPage = () => {
   const handleFavorite = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/favorite`,
+        `http://localhost:5000/api/user_favorites/${book_id}`,
         { book_id },
         {
           headers: {
@@ -56,7 +57,7 @@ const BookDetailPage = () => {
       }
     } catch (error) {
       console.log(error);
-    }
+    } 
   };
 
   const handleReview = async () => {
@@ -87,35 +88,7 @@ const BookDetailPage = () => {
         </div>
       )}
 
-      <h3>Reviews</h3>
-      {reviews.length > 0 ? (
-        <div>
-          {reviews.map((review) => (
-            <div key={review.id}>
-              <p>{review.text}</p>
-              <p>{review.rating}</p>
-            </div>
-          ))}
-          <p>Average Rating: {book?.average_rating}</p>
-        </div>
-      ) : (
-        <p>No reviews found for this book.</p>
-      )}
-
-      {user && (
-        <div>
-          <h3>Add a Review</h3>
-          <form onSubmit={handleReview}>
-            <textarea
-              rows="4"
-              cols="50"
-              placeholder="Enter your review..."
-            ></textarea>
-            <input type="number" placeholder="Rating" min="1" max="5" />
-            <button type="submit">Submit Review</button>
-          </form>
-        </div>
-      )}
+      <ReviewList reviews={reviews} book={book} handleReview={handleReview} user={user}/>
     </div>
   );
 };
