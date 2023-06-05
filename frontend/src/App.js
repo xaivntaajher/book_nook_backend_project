@@ -43,10 +43,8 @@ function App() {
         />
         <Route
           path="/search"
-          element={
-            <PrivateRoute>
+          element={      
               <SearchPage />
-            </PrivateRoute>
           }
         />
 
