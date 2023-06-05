@@ -18,6 +18,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import AddFavorite from "./pages/FavoritesPage/AddFavorite";
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/book/:book_id" element={<BookDetailPage />} />
         <Route path="/favorites" element={<FavoritesPage/>}/>
+        <Route path="/add_favorite" element={<AddFavorite/>}/>
+
+
 
 
       </Routes>

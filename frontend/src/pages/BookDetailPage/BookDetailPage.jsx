@@ -13,7 +13,7 @@ const BookDetailPage = () => {
   const fetchBook = async () => {
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes/${book_id}`
+        `https://www.googleapis.com/books/v1/volumes/${book_id}/`
       );
       setBook(response.data);
     } catch (error) {
@@ -40,8 +40,8 @@ const BookDetailPage = () => {
   const handleFavorite = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/user_favorites/${book_id}`,
-        { book_id },
+        'http://localhost:5000/api/user_favorites',
+
         {
           headers: {
             Authorization: 'Bearer ' + token,
@@ -49,7 +49,7 @@ const BookDetailPage = () => {
         }
       );
       if (response.status === 200) {
-        // Update book.is_favorited in state
+
         setBook((prevBook) => ({
           ...prevBook,
           is_favorited: true,
@@ -71,6 +71,8 @@ const BookDetailPage = () => {
 
   return (
     <div>
+
+
       {book && (
         <div>
           <h2>{book.volumeInfo.title}</h2>
@@ -87,6 +89,9 @@ const BookDetailPage = () => {
           </button>
         </div>
       )}
+
+
+      <div></div>
 
       <ReviewList reviews={reviews} book={book} handleReview={handleReview} user={user}/>
     </div>

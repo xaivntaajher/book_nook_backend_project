@@ -78,8 +78,7 @@ class GetBookInformationResource(Resource):
             is_favorited = True
 
         response = {
-            "title": favorited.title,
-            "url": favorited.thumbnail_url,
+ 
             "reviews": reviews_data,
             "average_rating": round(avg_rating, 2),
             "is_favorited": is_favorited

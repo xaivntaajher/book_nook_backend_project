@@ -6,9 +6,9 @@ const BookCard = ({ book }) => {
 
   return (
     <div className="book-card">
-      <Link to={`/book/${id}`}>
-        <div>{title}</div>
-        <img src={thumbnail_url} alt={title} />
+      <Link to={`/book/${book.id}`}>
+        <div>{book.title}</div>
+        <div>{book.thumbnail_url}</div>
       </Link>
     </div>
   );

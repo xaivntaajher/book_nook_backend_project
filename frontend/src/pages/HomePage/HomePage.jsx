@@ -3,54 +3,40 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
 const HomePage = () => {
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]); 
 
-
-
-
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:5000/api/user_cars", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        const response = await axios.get("http://127.0.0.1:5000/api/cars");
         setCars(response.data);
       } catch (error) {
-        console.error(error.response.data);
+        console.log(error.response.data);
       }
     };
+
     fetchCars();
-
-  }, [token]);
-
-  console.log(cars)
+  }, []);
 
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      <Link to="/add">
-        <p>click to add new car</p>
-      </Link>
-      <Link to="/search">
-        <p>click to search</p>
-      </Link>
-      <Link to="/favorites">
-        <p>Favorites Page</p>
-      </Link>
-
-
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
+      <div>Hello, {user.username}!</div>
+      <div>Cars List:</div>
+      <div>
+        {cars.map((car) => (
+          <div key={car.id}>
+            <p>{car.make}</p>
+            <p>{car.model}</p>
+          </div>
         ))}
-
+      </div>
+      <div>
+        <Link to="/favorites">
+          <p>Go to Favorites</p>
+        </Link>
+      </div>
     </div>
   );
 };

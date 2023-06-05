@@ -85,8 +85,8 @@ class FavoriteSchema(ma.Schema):
     """
     id = fields.Integer(primary_key=True)
     book_id = fields.String(required=True)
-    title = fields.String()
-    thumbnail_url = fields.String()
+    title = fields.String(required=True)
+    thumbnail_url = fields.String(required=True)
     user_id = fields.Integer()
     user = ma.Nested(UserSchema, many=False)
     class Meta:

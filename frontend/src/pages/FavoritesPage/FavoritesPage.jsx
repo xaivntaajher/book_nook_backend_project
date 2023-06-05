@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
-import BookCard from "../BookDetailPage/BookCard";
 import { Link } from "react-router-dom";
-
-
+import axios from "axios";
 
 const FavoritesPage = () => {
   const [user, token] = useAuth();
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -18,27 +15,34 @@ const FavoritesPage = () => {
             Authorization: "Bearer " + token,
           },
         });
-        setBooks(response.data)
+        setBooks(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
     fetchFavorites();
-
   }, [token]);
-
-
-  const bookCards = books.map((book) => (
-    <Link key={book.id} to={`/book/${book.book_id}`}>
-      <BookCard book={book} />
-    </Link>
-));
-
 
   return (
     <div className="container">
       <div>{user.username}'s Favorites!</div>
-      <div>{bookCards}</div>
+      <div>
+        {books.map((book) => (
+          <Link key={book.id} to={`/book/${book.book_id}`}>
+            <div>
+
+              <p>{book.title}</p>
+              <p>{book.thumbnail_url}</p>
+
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div>  <Link to="/add_favorite">
+        <p>Add a new Favorite</p>
+      </Link></div>
+
 
     </div>
   );
