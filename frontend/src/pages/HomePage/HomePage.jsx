@@ -42,6 +42,9 @@ const HomePage = () => {
       <Link to="/favorites">
         <p>Favorites Page</p>
       </Link>
+      <Link to="/add_review">
+        <p>Review Form</p>
+      </Link>
 
 
       {cars &&
