@@ -1,0 +1,49 @@
+.text-center {
+    text-align: center;
+}
+
+.container-1 {
+    display: flex;
+}
+
+.description {
+    text-align: left;
+    padding: 1em;
+}
+
+img {
+    padding: 1em;
+    width: 250px;
+    height: auto;
+}
+
+.review {
+    padding: 1em;
+}
+
+.favorite-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+}
+
+.container-2 {
+    display: flex;
+    padding: 1em;
+
+}
+
+.rating {
+    margin: 1em;
+    padding: 5px;
+}
+
+.add-review {
+    align-self: auto;
+    MARGIN: auto;
+}
+
+.add-review-title {
+    margin-right: 20px;
+}
+

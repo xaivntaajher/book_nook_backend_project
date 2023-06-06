@@ -8,6 +8,7 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
+from resources.books import UserReviewsResource, UserFavoritesResource, UserFavoriteBookResource, GetBookInformationResource, ReviewDetailResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -26,23 +27,20 @@ def create_app():
     """
     # Creates app instance
     app = Flask(__name__)
-
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
-
+    CORS(app)
     # Registers all routes with API
     api = create_routes()
-
     # Registers Flask app with additional libraries created/imported above
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
-    cors.init_app(app)
+    # cors.init_app(app)
     api.init_app(app)
     migrate.init_app(app, db)
-
     return app
 
 
@@ -55,6 +53,11 @@ def create_routes():
     api.add_resource(LoginResource, '/api/auth/login')
     api.add_resource(AllCarResource, '/api/cars')
     api.add_resource(UserCarResource, '/api/user_cars')
-    # TODO: Create files for your Resources in resources folder, add them here
-    
+     # TODO: Create files for your Resources in resources folder, add them here
+    api.add_resource(UserReviewsResource, '/api/user_reviews')
+    api.add_resource(UserFavoritesResource, '/api/user_favorites')
+
+    api.add_resource(GetBookInformationResource, '/api/book_information/<string:book_id>')
+    api.add_resource(ReviewDetailResource, '/api/user_reviews/<int:review_id>') 
+
     return api
