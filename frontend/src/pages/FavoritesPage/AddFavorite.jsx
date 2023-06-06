@@ -23,7 +23,7 @@ const AddFavorite = (props) => {
     async function postNewFavorite(){
 
         try {
-            let response = axios.post("http://127.0.0.1:5000/api/user_favorites", formData, {
+            let response = await axios.post("http://127.0.0.1:5000/api/user_favorites", formData, {
                 headers: {
                   Authorization: "Bearer " + token,
                 },

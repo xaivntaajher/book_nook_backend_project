@@ -27,7 +27,7 @@ class UserFavoriteBookResource(Resource):
 
 
 
-class UserFavoritesResource(Resource):
+class UserFavoriteBookResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
@@ -36,27 +36,31 @@ class UserFavoritesResource(Resource):
     
 
 
-        # # Alternate version where JWT is used, but not required
-        # try:
-        #     verify_jwt_in_request()
-        #     user_id = get_jwt_identity()
-        # # Do stuff with token
-        # except:
-        # # Do stuff without token
-        #     return "Unauthorized", 401
+class UserFavoritesResource(Resource):
+    @jwt_required()
+    def get(self):
+        user_id = get_jwt_identity()
+        user_favorites = Favorite.query.filter_by(user_id=user_id)
+        return favorites_schema.dump(user_favorites), 200
+
 
     @jwt_required()
     def post(self):
         user_id = get_jwt_identity()
         form_data = request.get_json()
         book_id = form_data.get("book_id")
+        title = form_data.get("title")  # Add this line to retrieve the title value
+        thumbnail_url = form_data.get("thumbnail_url")  # Add this line to retrieve the thumbnail_url value
         favorite = Favorite.query.filter_by(user_id=user_id, book_id=book_id).first()
         if favorite:
             return {"message": "Book is already favorited"}, 400
-        new_favorite = Favorite(user_id=user_id, book_id=book_id)
+        new_favorite = Favorite(user_id=user_id, book_id=book_id, title=title, thumbnail_url=thumbnail_url)  # Include the title and thumbnail_url values
         db.session.add(new_favorite)
         db.session.commit()
         return favorite_schema.dump(new_favorite), 201
+    
+
+
     
 class GetBookInformationResource(Resource):
     @jwt_required()
@@ -78,8 +82,7 @@ class GetBookInformationResource(Resource):
             is_favorited = True
 
         response = {
-            "title": favorited.title,
-            "url": favorited.thumbnail_url,
+
             "reviews": reviews_data,
             "average_rating": round(avg_rating, 2),
             "is_favorited": is_favorited

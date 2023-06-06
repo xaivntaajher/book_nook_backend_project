@@ -3,12 +3,16 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import ReviewList from '../../components/ReviewList/ReviewList';
+import AddFavorite from '../FavoritesPage/AddFavorite';
 
 const BookDetailPage = () => {
   const { book_id } = useParams();
   const [book, setBook] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [user, token] = useAuth();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [newFavorite, setNewFavorite] = useState(null);
+
 
   const fetchBook = async () => {
     try {
@@ -18,6 +22,35 @@ const BookDetailPage = () => {
       setBook(response.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+
+
+  const handleFavorite = async () => {
+    try {
+
+      const defaultValues = {
+        book_id: book_id,
+        title: book.volumeInfo.title,
+        thumbnail_url: book.volumeInfo.imageLinks.thumbnail,
+      };
+  
+    
+      const response = await axios.post(
+        'http://localhost:5000/api/user_favorites/', defaultValues,
+
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+      console.log(response.data);
+      setNewFavorite(response.data);
+      setIsFavorite((prevState) => !prevState);;
+    } catch (error) {
+      console.error('Error posting new favorite', error);
     }
   };
 
@@ -35,29 +68,6 @@ const BookDetailPage = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleFavorite = async () => {
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/api/user_favorites',
-
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        }
-      );
-      if (response.status === 200) {
-
-        setBook((prevBook) => ({
-          ...prevBook,
-          is_favorited: true,
-        }));
-      }
-    } catch (error) {
-      console.log(error);
-    } 
   };
 
   const handleReview = async () => {
@@ -84,9 +94,12 @@ const BookDetailPage = () => {
               alt={book.volumeInfo.title}
             />
           )}
-          <button onClick={handleFavorite}>
-            {book.is_favorited ? 'Unfavorite' : 'Favorite'}
-          </button>
+        <button
+        className={`favorite-button ${isFavorite ? 'favorite-button-yellow' : 'favorite-button-black'}`}
+        onClick={handleFavorite}>
+
+        {isFavorite ? 'Favorited' : 'Favorite'}
+      </button>
         </div>
       )}
 

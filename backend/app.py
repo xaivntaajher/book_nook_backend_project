@@ -27,23 +27,20 @@ def create_app():
     """
     # Creates app instance
     app = Flask(__name__)
-
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
-
+    CORS(app)
     # Registers all routes with API
     api = create_routes()
-
     # Registers Flask app with additional libraries created/imported above
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
-    cors.init_app(app)
+    # cors.init_app(app)
     api.init_app(app)
     migrate.init_app(app, db)
-
     return app
 
 
