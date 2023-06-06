@@ -8,7 +8,7 @@ import './ResultsList.css'
 const ResultsList = ({searchResults}) => {
 
     return ( 
-        <div>
+        <div className='results-grid'>
         {searchResults.length > 0 ? (
           searchResults.map((item) => (
             <Link
