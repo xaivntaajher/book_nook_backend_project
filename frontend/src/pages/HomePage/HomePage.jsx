@@ -32,7 +32,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
+      <h1>Welcome {user.username}!</h1>
       <Link to="/add">
         <p>click to add new car</p>
       </Link>

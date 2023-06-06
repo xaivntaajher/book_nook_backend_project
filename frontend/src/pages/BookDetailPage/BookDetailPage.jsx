@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import ReviewList from '../../components/ReviewList/ReviewList';
 import AddFavorite from '../FavoritesPage/AddFavorite';
 import { Link } from 'react-router-dom';
+import '../BookDetailPage/BookDetailPage.css'
 
 const BookDetailPage = () => {
   const { book_id } = useParams();
@@ -91,36 +92,45 @@ const BookDetailPage = () => {
     <div>
       {book && (
         <div>
-          <h2>{book.volumeInfo.title}</h2>
-          <p>Author(s): {book.volumeInfo.authors}</p>
-          <p>Description: {book.volumeInfo.description}</p>
-          {book.volumeInfo.imageLinks && (
-            <img
-              src={book.volumeInfo.imageLinks.thumbnail}
-              alt={book.volumeInfo.title}
-            />
-          )}
-          <button
-            className={`favorite-button ${
-              isFavorite ? 'favorite-button-yellow' : 'favorite-button-black'
-            }`}
-            onClick={handleFavorite}
-          >
-            {isFavorite ? 'Favorited' : 'Favorite'}
-          </button>
+          <h2 className='text-center'>{book.volumeInfo.title}</h2>
+          <p className='text-center'>Author(s): {book.volumeInfo.authors}</p>
+          <div className='container-1'>
+          <div>
+            {book.volumeInfo.imageLinks && (
+              <img
+                src={book.volumeInfo.imageLinks.thumbnail}
+                alt={book.volumeInfo.title} className='img'
+              />
+            )}
+            </div>
+          <div className='description'>Description: {book.volumeInfo.description}</div>
+          </div>
+          <div className='favorite-btn'>
+            <button
+              className={`${
+                isFavorite ? 'favorite-button-yellow' : 'favorite-button-black'
+              }`}
+              onClick={handleFavorite}
+            >
+              {isFavorite ? 'Favorited' : 'Favorite'}
+            </button>
+          </div>
         </div>
       )}
-
-      <Link to="/add_review">
-        <p>Review Form</p>
-      </Link>
-
+      <div>
+        <Link to="/add_review">
+          <p className='review'>Review Form</p>
+        </Link>
+      </div>
+      <div>
       <ReviewList
         reviews={reviews}
         book={book}
         handleReview={handleReview}
         user={user}
       />
+      </div>
+
     </div>
   );
 };
