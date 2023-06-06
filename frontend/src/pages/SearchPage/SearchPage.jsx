@@ -1,8 +1,8 @@
-// SearchPage.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import ResultsList from '../../components/ResultsList/ResultsList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import './SearchPage.css'; // Import the associated CSS file
 
 function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,10 +21,12 @@ function SearchPage() {
   };
 
   return (
-    <div>
-      <h1>Search Page</h1>
+    <div className="search-page">
+      <h1 className="title">Search Page</h1>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>
-      <ResultsList searchResults={searchResults}/>
+      <div className="results-list">
+        <ResultsList searchResults={searchResults}/>
+      </div>
     </div>
   );
 }

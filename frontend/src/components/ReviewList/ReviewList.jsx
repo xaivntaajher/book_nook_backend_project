@@ -8,10 +8,11 @@ const ReviewList = ({reviews, book, handleReview, user}) => {
 
           {reviews.length > 0 ? (
             <div>
-              <h3>Reviews</h3>
+              <h3>User Reviews</h3>
               {reviews.map((review) => (
                 <div key={review.id}>
                   <p>{review.text}</p>
+                  <h4>User Rating:</h4>
                   <p>{review.rating}</p>
                 </div>
               ))}

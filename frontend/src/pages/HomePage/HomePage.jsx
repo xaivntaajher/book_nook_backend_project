@@ -32,28 +32,17 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1>Welcome {user.username}!</h1>
-      <Link to="/add">
-        <p>click to add new car</p>
-      </Link>
+      <h1>Welcome back,  {user.username} </h1>
+
       <Link to="/search">
-        <p>click to search</p>
+        <p>Click To Search for Books</p>
       </Link>
       <Link to="/favorites">
-        <p>Favorites Page</p>
-      </Link>
-      <Link to="/add_review">
-        <p>Review Form</p>
+        <p>Go To Favorites Page</p>
       </Link>
 
 
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))}
-
+  
     </div>
   );
 };

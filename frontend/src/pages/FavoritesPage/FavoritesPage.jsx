@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./FavoritesPage.css";
 
 const FavoritesPage = () => {
   const [user, token] = useAuth();
@@ -25,24 +26,22 @@ const FavoritesPage = () => {
 
   return (
     <div className="container">
-      <div>{user.username}'s Favorites!</div>
+      <h1>{user.username}'s Favorites!</h1>
+      <h2>
+        <Link to="/add_favorite" className="add-favorite-link">
+          Add a new Favorite? Clike Here.
+        </Link>
+      </h2>
       <div>
         {books.map((book) => (
-          <Link key={book.id} to={`/book/${book.book_id}`}>
-            <div>
-
-              <p>{book.title}</p>
-              <p>{book.thumbnail_url}</p>
-
-            </div>
+          <Link className="favorite-card" key={book.id} to={`/book/${book.book_id}`}>
+      
+              <p className="favorite-title">{book.title}</p>
+              <p className="favorite-url">{book.thumbnail_url}</p>
+       
           </Link>
         ))}
       </div>
-
-      <div>  <Link to="/add_favorite">
-        <p>Add a new Favorite</p>
-      </Link></div>
-
 
     </div>
   );

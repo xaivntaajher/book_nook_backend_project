@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './ResultsList.css'
+
+
+
 
 const ResultsList = ({searchResults}) => {
 
@@ -14,7 +18,7 @@ const ResultsList = ({searchResults}) => {
               }}
               key={item.id}
             >
-              <div>
+              <span className='results-card'>
                 <h3>{item.volumeInfo.title}</h3>
                 {item.volumeInfo.imageLinks && (
                   <img
@@ -22,7 +26,7 @@ const ResultsList = ({searchResults}) => {
                     alt={item.volumeInfo.title}
                   />
                 )}
-              </div>
+              </span>
             </Link>
           ))
         ) : (
