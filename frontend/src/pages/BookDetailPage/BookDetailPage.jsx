@@ -130,7 +130,6 @@ const BookDetailPage = () => {
         user={user}
       />
       </div>
-
     </div>
   );
 };
